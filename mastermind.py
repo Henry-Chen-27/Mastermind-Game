@@ -117,4 +117,8 @@ def _print_result(result):
           ", misses: " + str(result['miss']))
 
 if __name__ == '__main__':
-    play_game()
+    play_again = "yes"
+    while play_again == "yes":
+        play_game()
+        print("Type 'yes' to play again, anything else to exit game: ")
+        play_again = input()
