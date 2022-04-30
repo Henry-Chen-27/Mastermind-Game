@@ -40,13 +40,38 @@ def check_solution(user_input, solution):
     return result
 
 def _increment_item(dict, item):
+    """
+    Increments the value of <item> in <dict> by 1
+    """
     if item in dict:
         dict[item] += 1
     else:
         dict[item] = 1
 
 # TODO: Implement user solution input
+def input_answer(color_list, solution_len = 4):
+    """
+    Prompts the user to enter their guess for the solution
 
+    Example input for solution length of 4:
+    "a a a a"
+    """
+    print("Enter your guess: ")
+    # user_input = input()
+    user_input = input().split(" ")
+    while not _valid_input(color_list, solution_len, user_input):
+        print("Invalid input, enter your guess again: ")
+        user_input = input().split(" ")
+    return user_input
+
+def _valid_input(color_list, solution_len, solution):
+    """
+    Checks if the user input is valid
+    """
+    for i in solution:
+        if i not in color_list:
+            return False
+    return len(solution) == solution_len
 
 # TODO: OPTIONAL, Implement settings
 # TODO: Play game
