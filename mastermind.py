@@ -86,12 +86,12 @@ def play_game():
         user_input = input_answer(color_list, 4)
         guess_count += 1
         result = check_solution(user_input, solution)
+        _print_guess(user_input)
         if result["hit"] == 4:
             print("That was the correct answer.")
-            print("You took {guess_count} guesses.")
+            print(f"You took {guess_count} guesses.")
             break
         else:
-            _print_guess(user_input)
             _print_result(result)
 
 def _print_guess(guess):
