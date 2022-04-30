@@ -1,5 +1,6 @@
 # Mastermind game
 import random
+from colorama import Fore, Style
 
 # TODO: Generate Solution
 def generate_solution(color_list, solution_len = 4):
@@ -75,3 +76,45 @@ def _valid_input(color_list, solution_len, solution):
 
 # TODO: OPTIONAL, Implement settings
 # TODO: Play game
+def play_game():
+    print("=====================")
+    color_list = ['R', 'Y', 'G', 'B', 'C', 'P']
+    solution = generate_solution(color_list, 4)
+    guess_count = 0
+    history = []
+    while True:
+        user_input = input_answer(color_list, 4)
+        guess_count += 1
+        result = check_solution(user_input, solution)
+        if result["hit"] == 4:
+            print("That was the correct answer.")
+            print("You took {guess_count} guesses.")
+            break
+        else:
+            _print_guess(user_input)
+            _print_result(result)
+
+def _print_guess(guess):
+    """
+    Prints the series of colours represented by <guess>
+    """
+    colours = {"R": Fore.RED,
+               "Y": Fore.YELLOW,
+               "G": Fore.GREEN,
+               "B": Fore.BLUE,
+               "C": Fore.CYAN,
+               "P": Fore.MAGENTA}
+    result_str = ""
+    for ch in guess:
+        result_str += colours[ch] + ch + " "
+    print(result_str + Style.RESET_ALL)
+
+def _print_result(result):
+    """
+    Prints the results from the user's guess
+    """
+    print("hits: " + str(result['hit']) + ", ins: " + str(result["in"]) + \
+          ", misses: " + str(result['miss']))
+
+if __name__ == '__main__':
+    play_game()
