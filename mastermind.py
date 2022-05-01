@@ -56,7 +56,7 @@ def input_answer(color_list, solution_len = 4):
     Prompts the user to enter their guess for the solution
 
     Example input for solution length of 4:
-    "a a a a"
+    "a b c d"
     """
     print("Enter your guess: ")
     user_input = input().split(" ")
@@ -75,18 +75,18 @@ def _valid_input(color_list, solution_len, solution):
     return len(solution) == solution_len
 
 # TODO: OPTIONAL, Implement settings
-def play_game():
+def play_game(num_pegs):
     print("=====================")
     color_list = ['R', 'Y', 'G', 'B', 'C', 'P']
-    solution = generate_solution(color_list, 4)
+    solution = generate_solution(color_list, num_pegs)
     guess_count = 0
     history = []
     while True:
-        user_input = input_answer(color_list, 4)
+        user_input = input_answer(color_list, num_pegs)
         guess_count += 1
         result = check_solution(user_input, solution)
         _print_guess(user_input)
-        if result["hit"] == 4:
+        if result["hit"] == num_pegs:
             print("That was the correct answer.")
             print(f"You took {guess_count} guesses.")
             break
@@ -122,7 +122,16 @@ def print_intro():
 if __name__ == '__main__':
     play_again = "yes"
     print_intro()
+    print("Enter the number of pegs to be guessed: ")
+    # verifies that the input is valid
+    while True:
+        num_pegs = input()
+        if num_pegs.isdigit():
+            break
+        else:
+            print("Please enter a positive integer: ")
+    num_pegs = int(num_pegs)
     while play_again == "yes" or play_again == "YES":
-        play_game()
+        play_game(num_pegs)
         print("Type 'yes' to play again, anything else to exit game: ")
         play_again = input()
