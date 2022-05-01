@@ -59,7 +59,7 @@ def input_answer(color_list, solution_len = 4):
     "a b c d"
     """
     print("Enter your guess: ")
-    user_input = input().split(" ")
+    user_input = input().upper().split(" ")
     while not _valid_input(color_list, solution_len, user_input):
         print("Invalid input, enter your guess again: ")
         user_input = input().split(" ")
@@ -74,7 +74,6 @@ def _valid_input(color_list, solution_len, solution):
             return False
     return len(solution) == solution_len
 
-# TODO: OPTIONAL, Implement settings
 def play_game(num_pegs):
     print("=====================")
     color_list = ['R', 'Y', 'G', 'B', 'C', 'P']
